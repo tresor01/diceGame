@@ -1,0 +1,25 @@
+function restart(){
+  alert("nous sommes dans le restart");
+  let Confirm = confirm("voulez vous faire une nouvelle partie?");
+      if(Confirm===true){
+        Player1.name="PlayerName1";
+        Player1.CurrentScore=0;
+        Player1.GlobalScore=0;
+        Player1.Starter=false;
+      
+        Player2.name="PlayerName1";
+        Player2.CurrentScore=0;
+        Player2.GlobalScore=0;
+        Player2.Starter=false;
+
+        players = [Player1, Player2];
+        NamesUpdate();
+
+      }
+      else{
+        //rien à mettre donc le jeu continue!
+      }
+ // RollDice.style.display="";
+  //Holdscore.style.display="";
+
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jeu dé</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="jeu.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!--lien<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+         icone hold-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="gameSpace">
+            <div id="firstPlayer">
+                <h1 id="h1FirstPlayer">Player 1</h1><span id="actifPlayer1"></span>
+                <div id="GlobalScoreFirst">
+                    <span id="GlobalScore1Display"></span>
+                </div>
+                <div class="RoundScore1">
+                    <p id="RoundScore1Paragraph">Current</p>
+                    <span id="UpdateScore1"></span>
+                </div>
+            </div>
+                
+            <div id="gameTools">
+                <div id="newGame">
+                <span class="material-icons add_circle-icon">
+                    add_circle</span>
+                <p class="newGameParagraph">NEW GAME</p>
+                </div>
+                <div id="rollDice">
+                    <span class="material-icons sync-icon">
+                        sync</span>
+                    <p class="RollDiceParagraph">ROLL DICE</p>
+                    </div>
+                <div id="Holdscore">
+                    <span class="material-icons system_update_alt
+                    -icon">
+                    system_update_alt
+                    </span>
+                    <p class="HoldScoreParagraph">Hold Score</p>
+                    </div>
+                
+                <div id="dice">
+                    <div class="face" id="face1"></div>
+                    <div class="face" id="face2"></div>
+                    <div class="face" id="face3"></div>
+                    <div class="face" id="face4"></div>
+                    <div class="face" id="face5"></div>
+                    <div class="face" id="face6"></div>
+                </div>
+            </div>
+            <div id="secondPlayer">
+                <h1 id="h1SecondPlayer">Player 2</h1><span id="actifPlayer2"></span>
+                <div id="GlobalScoreSecond">
+                    <span id="GlobalScore2Display"></span>
+                </div>
+                <div class="RoundScore2"> 
+                    <p id="RoundScore2Paragraph"> Current </p>
+                    <span id="UpdateScore2"></span>
+                </div>
+            </div>
+
+        </div>
+    <script src="ScriptJeu.js"></script>
+    </body>
+</html>
