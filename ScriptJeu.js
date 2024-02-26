@@ -7,6 +7,9 @@ const GlobalScore1Html = document.getElementById("GlobalScore1Display");
 const GlobalScore2Html = document.getElementById("GlobalScore2Display");
 const isPlayer1active = document.getElementById("actifPlayer1");
 const isPlayer2active = document.getElementById("actifPlayer2");
+const firstPlayer = document.getElementById("firstPlayer");
+const secondPlayer = document.getElementById("secondPlayer");
+
 /* differents points du dé*/
 /*const face1 = document.getElementById("face1");
 const face2 = document.getElementById("face2");
@@ -104,10 +107,13 @@ function isActive(){
   if (Player1.Starter==true){
     isPlayer1active.style.display="";
     isPlayer2active.style.display="none";
+   // firstPlayer.style.backgroundColor="#ECE5E4";
+
   }
   else if (Player2.Starter==true){
     isPlayer1active.style.display="none";
     isPlayer2active.style.display=""; 
+    //secondPlayer.style.backgroundColor="#ECE5E4";
   }
 }
 

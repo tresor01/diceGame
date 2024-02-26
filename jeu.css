@@ -12,7 +12,7 @@ body{
 #firstPlayer{
     position: absolute;
     left: 0;
-    /*border:2px solid black;*/
+   /* border:2px solid black;*/
     height: 100%;
     width: 50%;
   
@@ -33,7 +33,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
- /* border-style: solid;*/
+  /*border-style: solid;*/
   height: 100%;
   width: 20%;
 }
@@ -48,7 +48,7 @@ body{
     position: absolute;
     left: 30%;
     bottom: 70%;
-  
+
     /*border: 2px solid black;*/
 
 }
@@ -70,6 +70,7 @@ body{
     font-weight: bold;
     right: inherit;
     bottom: 40%;
+   /* border: 2px solid black;*/
    
 
 }
@@ -124,7 +125,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
- /*   border: 2px solid black;*/
+   /* border: 2px solid black;*/
     height: 15%;
     width: 18%;
 }
@@ -136,7 +137,7 @@ body{
    display: flex;
    justify-content: center;
    align-items: center;
-   border: 2px solid black;
+   /*border: 2px solid black;*/
    background-color: #f0f0f0;
    font-size: 24px;
    border: 1px solid #ccc;
@@ -171,6 +172,8 @@ body{
 .newGameParagraph,.RollDiceParagraph,.HoldScoreParagraph{
     text-align: center;
     position: absolute;
+    font-weight: bold;
+    /*border:2px solid black;*/
     /*border:2px solid black;*/
     top: 10%; 
     left: 50%; 
@@ -179,9 +182,12 @@ body{
     
 }
 #newGame{
-  /* border:2px solid black;*/
+   /*border:2px solid black;*/
    position: absolute;
     top: 10%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
    /* left: 50%; 
     transform: translate(-50%, -50%);*/
    width: 100%;
@@ -197,6 +203,7 @@ top: 45%;
 left: 25%; 
 transform: translate(-50%, -50%); 
 color: red;
+/*border:2px solid black;*/
 
 }
 #rollDice{
@@ -204,9 +211,9 @@ color: red;
     top: 72%; 
     font-weight: bold;
     /*left: 50%; 
-    transform: translate(-50%, -50%);
-    border: 2px solid black; */
-    width: 70%;
+    transform: translate(-50%, -50%);*/
+   /* border: 2px solid black; */
+    width: 100%;
     height: 7%;
 }
 .sync-icon{
@@ -214,6 +221,7 @@ color: red;
     top: 20%;     
     left: 10%;
     color: red;
+    /*border: 2px solid black; */
 }
 #Holdscore{
     position: absolute;
@@ -222,14 +230,15 @@ color: red;
     /*left: 50%; 
     transform: translate(-50%, -50%);*/
    /* border: 2px solid black; */
-    width: 70%;
+    width: 100%;
     height: 7%;   
 }
 .system_update_alt{
     position: absolute;
     top: 20%;     
     left: 10%;
-    color: red;   
+    color: red;
+   /* border: 2px solid black;*/
 }
 .face{
     width: 7%;
@@ -249,5 +258,162 @@ color: red;
 #face4 { bottom:75%; left: 75%; }
 #face5 { top: 75%; left: 75%; } 
 #face6 { top: 75%; left: 48%; } 
+
+@media screen and (max-width:1200px) {
+    #dice{
+        width: 100px;
+        height: 100px;
+        
+    }
+    #h1FirstPlayer,#h1SecondPlayer{
+        font-size: 25px;
+    }
+   
+   
+
+}
+@media screen and (max-width:1200px) {
+    .add_circle-icon {
+        left:20%;
+    }
+    .newGameParagraph{
+        left: 70%;
+        font-size: 15px;
+        top: 20%;
+    }
+
+    #dice{
+        width: 80px;
+        height: 80px;
+        
+    }
+    #h1FirstPlayer,#h1SecondPlayer{
+        bottom: 72%;
+        font-size: 20px;
+        
+    }
+    #h1FirstPlayer{
+        right:  50%;
+    }
+    #h1SecondPlayer{
+        left: 50%;
+    }
+    #actifPlayer1{
+        right: 45%;
+        top:23.5%;
+        width: 2%;
+        height: 1%;
+    }
+    #actifPlayer2{
+        left:35%;
+        top:23.5%;
+        width: 2%;
+        height: 1%;
+    }
+    .RoundScore1{
+        width: 50%;
+        right: 40%;
+    }
+    .RoundScore2{
+        width: 50%;
+        left: 40%;
+    }
+   .sync-icon{
+        left: 0%;
+   }
+   .RollDiceParagraph{
+    left: 70%;
+    
+   }
+   .HoldScoreParagraph{
+    left: 70%;
+   }
+   .system_update_alt{
+    left: 0%;
+   }
+   #RoundScore1Paragraph{
+    right: 25%;
+   }
+   #RoundScore2Paragraph{
+    left: 25%;
+   }
+   #GlobalScoreFirst{
+    width: 50%;
+    left: 10%;
+   }
+   #GlobalScoreSecond{
+    width: 50%;
+    left: 40%;
+   }
+
+
+}
+@media screen and (min-width:400px) and (max-width:550px) {
+    /* on remonte les titres cuurent score pour les iphones supérieurs*/
+    #RoundScore1Paragraph,#RoundScore2Paragraph{
+        height: 30%;
+        font-size: 20px;
+
+       }
+       #h1FirstPlayer,#h1SecondPlayer{
+        font-size: 25px;
+
+    }
+}
+/* A partie de 550 à 1200 pixel je vais ajuster le paragraphe des current score et l'espace entre l'icon start , son paragraphe et la taille du dé, holdscore , espace entre icone et paragraphe*/
+@media screen and (min-width:550px) and (max-width:1200px) {
+    #dice{
+        width: 150px;
+        height: 150px;
+        
+    }
+    #h1FirstPlayer,#h1SecondPlayer{
+        bottom: 72%;
+        font-size: 40px;
+
+    }
+    .add_circle-icon {
+        height: 50%;
+        width: 30%;
+        right:100;
+        top: 60%;
+        padding-left: 20%;
+   }
+   .newGameParagraph{
+    font-size: 25px;
+    width: 80%;
+    
+}
+.RollDiceParagraph{
+    font-size: 25px;
+    width: 80%;
+   }
+   .sync-icon{
+    height: 50%;
+    width: 30%;
+    padding-left: 15%;
+    
+}
+.HoldScoreParagraph{
+    font-size: 25px;
+    width: 80%;
+
+}
+.system_update_alt{
+    height: 50%;
+    width: 30%;
+    padding-left: 15%;
+    
+   }
+   #RoundScore1Paragraph{
+    right: 35%;
+    font-size: 30px;
+   }
+   #RoundScore2Paragraph{
+    right: 35%;
+    font-size: 30px;
+   }
+
+}
 
 
