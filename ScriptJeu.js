@@ -53,30 +53,30 @@ StartGame.addEventListener('click', NamesUpdate);
 /* Je ne comprends pas pourquoi quand je click du coté droit de
 la div new game ça nexcute pas la fonction du cliques*/
 
-function RemovelistenerStargame(){
-  /*cette fonction heberge l'evenement qui supprime le premier
-  évènement du startgame, car je veux lui rajouter un evenement qui se fonctionnel que pendant la partie*/
-  StartGame.removeEventListener('click',NamesUpdate);
- } 
+
 function RemovelistenerRollDice(){
+  alert("on est dans la fonction qui supprime le rolldice dans le dé");
   /*cette fonction heberge l'evenement qui supprime l'évènement du rollDice ,
   dans le cas ou les joueurs selectionnent Non à la demande re relancement de jeu 
   ainsi s'ils repondent "Non" le dé ne tournera plus*/
   RollDice.removeEventListener('click',Rolling);
- } 
+} 
 
 function NamesUpdate(event){
-  const regex = /^[a-zA-Z0-9]{3,}$/;
- // isPlayer1active.style.display="none";
- // isPlayer2active.style.display="none";
 
-  setTimeout(RemovelistenerStargame,50);
- /// StartGame.removeEventListener('click', NamesUpdate);
+  const regex = /^[a-zA-Z0-9]{3,}$/;
+  /* ces deux removeEventListenner permettent de supprimer l'écoute
+  des clicks de la partie antérieur car si on ne les supprime pas
+  dans une nouvelle partie ils sont en écoute ainsi que les listenners
+  de la nouvelle partie , ce qui crée des beugs tels que le redondance
+  d'evenement alors à chaque nouvelle partie ils ,sont initialement delete*/
+  StartGame.removeEventListener('click', NamesUpdate);
+  StartGame.removeEventListener('click',cancelGame);
 
     alert("C'est parti!");
     /*mise des valeurs noms dans deux variables*/
     let PlayerName = prompt("rentrez nom du joueur 1");
-
+    //boucle pour ne pas avoir une valeur vide en nom !
     while (!regex.exec(PlayerName)){
       event.preventDefault();
       alert("le nom du joueur doit contenir au moins 3 caractères");
@@ -104,16 +104,20 @@ function NamesUpdate(event){
     
 }
 function isActive(){
+  //fonction pour mettre à jour le statu du joeur actif et changer la couleur de son ecran
   if (Player1.Starter==true){
     isPlayer1active.style.display="";
     isPlayer2active.style.display="none";
-   // firstPlayer.style.backgroundColor="#ECE5E4";
-
+    firstPlayer.style.backgroundColor='rgba(150, 150, 150, 0.5)'; 
+    secondPlayer.style.backgroundColor="";
+    Dice.style.color='';
   }
   else if (Player2.Starter==true){
     isPlayer1active.style.display="none";
     isPlayer2active.style.display=""; 
-    //secondPlayer.style.backgroundColor="#ECE5E4";
+    secondPlayer.style.backgroundColor='rgba(150, 150, 150, 0.5)' ;
+    firstPlayer.style.backgroundColor='';
+    Dice.style.color='';
   }
 }
 
@@ -125,20 +129,12 @@ function FirstToPlay(){
    Player1.Starter=true;
     alert("C'est à "+Player1.name+" de commencer!");
     isActive();
-    /*isPlayer1active.style.display="";
-    isPlayer2active.style.display="none";
-    //isActive("none","");*/
   }
   else{
     Player2.Starter=true;
     alert("C'est à "+Player2.name+" de commencer!");
-   /* isPlayer2active.style.display="";
-    isPlayer1active.style.display="none";
-   // isActive("","none");*/
    isActive();
   }
-  //isActive();
- // Mettre la fonnction qui montre le joueur actif ici
   Play();// appel de la fonction play pour commencer le jeu
 }
 // fonction pour recuperer le joueur actif et le non actif
@@ -167,7 +163,7 @@ function UpdateCurrentScore(){
     Player2.CurrentScore = CurrentPlayer.CurrentScore;
     document.getElementById("UpdateScore2").innerHTML=Player2.CurrentScore;
   }
-/* cette condition fait une verification par le nom donc elle reste limité si 
+/*!! cette condition fait une verification par le nom pour mettre à jour le current score donc elle reste limité si 
 les 2 joueurs entrent le meme nom */
 }
 // fonction qui met à jour le contenu html du dé
@@ -187,13 +183,11 @@ function updateDiceContent(){
     statusPlayer.Starter=false;
     statusPlayer2.Starter=true;
     isActive();
-    
-
   // afficher une alerte indiquant c'est à qui de jouer!
-    setTimeout(Alert,500);
+   /* setTimeout(Alert,500);
     function Alert (){
       alert("c'est au tour de "+statusPlayer2.name);
-    }
+    }*/
   }
   else if(diceValue === 2){
     Dice.innerHTML = face2+face5;
@@ -224,6 +218,9 @@ function updateDiceContent(){
  }
 
 }
+/* cette fonction permet de lancer updateDiceContent
+chaque 1sec quand Update timer est appelée ,sachant ue c'est appélé apres 
+le click RollDice*/
 function UpdateTimer(){
  setTimeout(updateDiceContent,1000);
 }
@@ -232,84 +229,76 @@ function restart(){
 
   let confirmation = confirm("voulez vous reprendre une nouvelle partie ?");
   if (confirmation===true){
-     // suppression des événements du jeu fini
- function Removelistener(){
-  /*cet evenement permet de rendre la supression de l'evenement de
-  la partie precedente plus rapide*/
-  RollDice.removeEventListener('click',Rolling);
- } 
-
- setTimeout(Removelistener,50);
-  // Réinitialiser les joueurs
-  Player1.reset();
-  Player2.reset();
-  NamesUpdate();
+      // Réinitialiser les joueurs
+        Player1.reset();
+        Player2.reset();
+        NamesUpdate();
   }
-
 }
 function End(){
+  //on verifie dans le if si l'un des joueurs à gagner  si non ! on rentre dans le else
   let statusPlayer = isPlayer(true);
   if (statusPlayer.GlobalScore >= 100 ){
       alert(statusPlayer.name+" a gagné!!!");
       statusPlayer.Starter = false;// pour desactiver le joueur actif et ne pas rester dans une boucle infinie
-      restart();
-        
+      restart();    
    }
-
-   StartGame.addEventListener('click', ()=>{
-     if (Player1.GlobalScore > Player2.GlobalScore){
+  else{
+    /* on active l'evenement pour annuler, ça se passe quand on cliques encore
+    sur startGame pendant la partie */
+    StartGame.addEventListener('click', cancelGame)
+  }
+ // removeHoldscoreClick(); 
+  //RemovelistenerRollDice();
+}  
+function cancelGame (){
+  /* fonction pour annuler la partie si le joueur clique encore sur
+  startGame pendant la partie*/ 
+    if (Player1.GlobalScore > Player2.GlobalScore){
       let confirmation = confirm("Etes vous sur de vouloir annuler la partie?");
       if (confirmation===true){
         alert(Player1.name+" a gagné!!!");
         restart();
       }
-     
-  
     }
     else if  (Player1.GlobalScore < Player2.GlobalScore){
       let confirmation = confirm("Etes vous sur de vouloir annuler la partie?");
       if (confirmation===true){
         alert(Player2.name+" a gagné!!!");
         restart();
-      }
-      
+      }     
     } 
-
     else if(Player1.GlobalScore === Player2.GlobalScore){
       let confirmation = confirm("Etes vous sur de vouloir annuler la partie?");
       if(confirmation===true){
         alert(" Vous etes ex aequo");
         restart();
       }
-
     }
-    
-   }) 
-  }  
+} 
+
 
 function UpdateGlobaleScore(){
-  activePlayer = isPlayer(true);
+  // fonction qui contien l'evenement du bouton Holdscore
+  Holdscore.addEventListener('click',globaleStoring);
+}
   // quand on change de joueur ça ne met pas à jour le global score du nouvel actif player 
-  if (activePlayer){
-     Holdscore.addEventListener('click', ()=>{
-     //alert("HOLD FONCTIONNE");
+function globaleStoring (){
+    activePlayer = isPlayer(true);
      activePlayer.GlobalScore += activePlayer.CurrentScore;
      activePlayer.CurrentScore = 0;
      UpdateCurrentScore();
      GlobalScore1Html.innerHTML=Player1.GlobalScore;
      GlobalScore2Html.innerHTML=Player2.GlobalScore;
      setTimeout(End,500); 
-     
-    })
-  } 
-}
-
+    
+    }
 
 // fonction qui lance le jeu apres le click
 function Play() {
 RollDice.addEventListener("click", Rolling); 
-
 }
+// fonction qui s'execute quand on roule le dé
 function Rolling() {
   // Désactiver le clic du dé momentanément
   RollDice.onclick = null;
@@ -359,7 +348,7 @@ function Rolling() {
       RollDice.onclick = Rolling;
     }
   }
-  animate(1, performance.now());  // Démarrer l'animation
+  animate(1, performance.now()); // Démarrer l'animation
   UpdateTimer();// lancer updateTimer qui elle lance UpdateDiceContente
   UpdateGlobaleScore();//elle permet de mettre à jour le score global
 
